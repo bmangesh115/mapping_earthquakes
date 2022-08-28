@@ -39,17 +39,23 @@ L.control.layers(baseMaps).addTo(map);
 let torontoData = "https://raw.githubusercontent.com/bmangesh115/mapping_earthquakes/main/torontoRoutes.json";
 
 
+// Create a style for the lines.
+let myStyle = {
+  color: "#ffffa1",
+  weight: 2
+}
+
+
 d3.json(torontoData).then(function(data){
   console.log(data);
   L.geoJSON(data, {
+    style: myStyle,
     // We turn each feature into a marker on the map.
     onEachFeature: function(feature, layer) {
       console.log(layer);
       layer.bindPopup("<h3>Airline: "+ feature.properties.airline +
       "<h3> <hr> <h3>Destination: "+ feature.properties.dst + "</h3>");
-      layer.setStyle({color:'lightyellow',
-                      weight:2,
-    });
+      // layer.setStyle({color:'lightyellow', weight:2,});
      
     }
     
